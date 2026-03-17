@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(73, 77, 79);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.label {
+  grid-area: label;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.display {
+  grid-area: display;
+}
+
+#clear {
+  grid-area: clear;
+  background-color: rgb(204, 57, 57);
+}
+#negative_pos {
+  grid-area: negative_pos;
+  background-color: rgb(87, 113, 175);
+}
+
+#divide {
+  grid-area: divide;
+}
+#multiply {
+  grid-area: multiply;
+}
+#sub {
+  grid-area: sub;
+}
+#add {
+  grid-area: add;
+}
+#equal {
+  grid-area: equal;
+  background-color: rgb(57, 155, 57);
+}
+
+#num_0 {
+  grid-area: num_0;
+}
+#num_1 {
+  grid-area: num_1;
+}
+#num_2 {
+  grid-area: num_2;
+}
+#num_3 {
+  grid-area: num_3;
+}
+#num_4 {
+  grid-area: num_4;
+}
+#num_5 {
+  grid-area: num_5;
+}
+#num_6 {
+  grid-area: num_6;
+}
+#num_7 {
+  grid-area: num_7;
+}
+#num_8 {
+  grid-area: num_8;
+}
+#num_9 {
+  grid-area: num_9;
+}
+#dot {
+  grid-area: dot;
+}
+
+.calculator {
+  padding-inline: 20px;
+  padding-bottom: 30px;
+  padding-top: 5px;
+  width: 350px;
+  height: 450px;
+  background-color: rgb(71, 72, 72);
+  border-radius: 20px;
+  box-shadow: inset -1.5px -3px 20px black;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 0.5fr 1.2fr repeat(5, 1fr);
+  grid-template-areas:
+    "label label label label"
+    "display display display display"
+    "clear clear negative_pos divide"
+    "num_7 num_8 num_9 multiply"
+    "num_4 num_5 num_6 sub"
+    "num_1 num_2 num_3 add"
+    "num_0 dot equal equal";
+  gap: 10px;
+}
+
+.shadow {
+  border-radius: 20px;
+  box-shadow: 2.5px 5px 10px 2px black;
+}
+
+.corp {
+  margin-left: 15px;
+  font-size: 17px;
+  font-weight: 100;
+  font-family: "Brush Script MT", cursive;
+}
+
+.model {
+  font-size: 22px;
+  font-weight: 800;
+  margin-right: 15px;
+  color: rgb(33, 33, 33);
+  border-bottom: 2px solid #313131;
+}
+
+.model span {
+  font-size: 15px;
+  font-style: italic;
+  color: rgb(174, 160, 143);
+}
+
+.display {
+  background-color: rgb(27, 36, 27);
+  color: rgb(201, 201, 201);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #3b3b3b;
+  box-shadow: inset 2.5px 5px 5px rgb(9, 9, 9);
+  margin-inline: 10px;
+}
+
+.display p {
+  margin-inline: 10px;
+  font-size: 30px;
+}
+
+.btn {
+  border: 2px solid rgb(65, 65, 65);
+  border-radius: 8px;
+  box-shadow: 1px 2px 3px 1.5px black;
+  background-color: rgb(161, 151, 139);
+  font-size: 18px;
+  font-weight: 900;
+  color: rgb(42, 42, 42);
+}
+
+.operators {
+  background-color: rgb(190, 113, 57);
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: translate(0.5px, 1.2px);
+  /* transition: 0.2s; */
+  box-shadow: 0.5px 1px 2px 1px black;
+}
