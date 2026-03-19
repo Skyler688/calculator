@@ -1,3 +1,5 @@
+// ################# DOM ##################
+
 const operators = {
   clear: document.getElementById("clear"),
   negative_pos: document.getElementById("negative_pos"),
@@ -5,33 +7,127 @@ const operators = {
   multiply: document.getElementById("multiply"),
   sub: document.getElementById("sub"),
   add: document.getElementById("add"),
-  equals: document.getElementById("equals"),
+  equal: document.getElementById("equal"),
 };
 
-const numbers = {
-  dot: document.getElementById("dot"),
-  num_0: document.getElementById("num_0"),
-  num_1: document.getElementById("num_1"),
-  num_2: document.getElementById("num_2"),
-  num_3: document.getElementById("num_3"),
-  num_4: document.getElementById("num_4"),
-  num_5: document.getElementById("num_5"),
-  num_6: document.getElementById("num_6"),
-  num_7: document.getElementById("num_7"),
-  num_8: document.getElementById("num_8"),
-  num_9: document.getElementById("num_9"),
-};
+const numbers = [];
+for (let i = 0; i <= 9; i++) {
+  numbers.push(document.getElementById(`num_${i}`));
+}
 
-operators.clear.addEventListener("mouseup", () => {
-  console.log("clear");
+const dot = document.getElementById("dot");
+
+const display = document.getElementById("display_value");
+
+// Import functions
+import { addInstruction } from "./util/add_instruction.js";
+import { instructionsToDisplayString } from "./util/to_display.js";
+import { calculate } from "./util/calculate.js";
+
+// ################## NUM EVENTS ###################
+// This is the string used to assemble the calculations to be done.
+const instructions = [];
+
+let number_buffer = "";
+
+numbers.forEach((number, index) => {
+  number.addEventListener("mouseup", () => {
+    if (number_buffer.length >= 19) return;
+
+    number_buffer = number_buffer + String(index);
+    display.textContent =
+      instructionsToDisplayString(instructions) + number_buffer;
+  });
 });
 
-operators.negative_pos.addEventListener("mouseup", () => {});
+dot.addEventListener("mouseup", () => {
+  if (number_buffer >= 19) return;
 
-operators.divide.addEventListener("mouseup", () => {});
+  if (number_buffer.includes(".")) return;
+  number_buffer = number_buffer + ".";
+  display.textContent =
+    instructionsToDisplayString(instructions) + number_buffer;
+});
 
-operators.multiply.addEventListener("mouseup", () => {});
+// ############### OPERATOR EVENTS ##################
 
-operators.sub.addEventListener("mouseup", () => {});
+// Clear
+operators.clear.addEventListener("mouseup", () => {
+  number_buffer = "";
+  display.textContent = "";
+  instructions.length = 0; // emptying the array
+});
 
-operators.add.addEventListener("mouseup", () => {});
+// Negative positive toggle
+operators.negative_pos.addEventListener("mouseup", () => {
+  if (number_buffer.includes("-")) {
+    number_buffer = number_buffer.slice(1, number_buffer.length);
+  } else {
+    number_buffer = "-" + number_buffer.trim();
+  }
+
+  display.textContent =
+    instructionsToDisplayString(instructions) + number_buffer;
+});
+
+// Divide
+operators.divide.addEventListener("mouseup", () => {
+  if (number_buffer.length < 0 && number_buffer === ".") return;
+
+  const operation = "/";
+  if (!addInstruction(instructions, number_buffer, operation)) return;
+
+  number_buffer = "";
+  display.textContent = instructionsToDisplayString(instructions);
+});
+
+// Multiply
+operators.multiply.addEventListener("mouseup", () => {
+  if (number_buffer.length < 0 && number_buffer === ".") return;
+
+  const operation = "*";
+  if (!addInstruction(instructions, number_buffer, operation)) return;
+
+  number_buffer = "";
+  display.textContent = instructionsToDisplayString(instructions);
+});
+
+// Subtract
+operators.sub.addEventListener("mouseup", () => {
+  if (number_buffer.length < 0 && number_buffer === ".") return;
+
+  const operation = "-";
+  if (!addInstruction(instructions, number_buffer, operation)) return;
+
+  number_buffer = "";
+  display.textContent = instructionsToDisplayString(instructions);
+});
+
+// Add
+operators.add.addEventListener("mouseup", () => {
+  if (number_buffer.length < 0 && number_buffer === ".") return;
+
+  const operation = "+";
+  if (!addInstruction(instructions, number_buffer, operation)) return;
+
+  number_buffer = "";
+  display.textContent = instructionsToDisplayString(instructions);
+});
+
+// Equal
+operators.equal.addEventListener("mouseup", () => {
+  // Cleaning up the instruction list before calculation.
+  const num_check = +number_buffer;
+  if (number_buffer.length == 0 || Number.isNaN(num_check)) {
+    instructions.pop();
+  } else {
+    instructions.push(number_buffer);
+  }
+
+  const result = calculate(instructions);
+  instructions.length = 0;
+
+  console.log(String(result));
+  number_buffer = String(result);
+  display.textContent = result;
+});

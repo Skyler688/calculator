@@ -4,45 +4,65 @@ export class Calculator {
   }
 
   #checkForNull() {
-    return this.current_value === null ? true : false;
+    if (this.current_value === null) {
+      throw new Error("Current value must be set before using an operator.");
+    }
+  }
+
+  #validateValue(value) {
+    const num = +value; // if the value is a string attempt to convert to number.
+
+    if (Number.isNaN(num)) {
+      throw new TypeError("Passed value must be of type number.");
+    }
+
+    return num;
   }
 
   setCurrentValue(value) {
-    this.current_value = value;
-    return this.current_value;
+    const num = this.#validateValue(value);
+    this.current_value = num;
   }
 
   clear() {
     this.current_value = null;
-    return 0;
   }
 
   divide(value) {
-    if (this.#checkForNull) return null;
+    const num = this.#validateValue(value);
+    this.#checkForNull();
 
-    const new_value = this.current_value / value;
+    const new_value = this.current_value / num;
 
     // Add checks for handling infinate and undifined results.
 
     this.current_value = new_value;
-    return this.current_value;
   }
 
   multiply(value) {
-    if (this.#checkForNull) return null;
+    const num = this.#validateValue(value);
+    this.#checkForNull();
 
-    return this.current_value * value;
+    this.current_value = this.current_value * num;
   }
 
   sub(value) {
-    if (this.#checkForNull) return null;
+    const num = this.#validateValue(value);
+    this.#checkForNull();
 
-    return this.current_value - value;
+    this.current_value = this.current_value - num;
   }
 
   add(value) {
-    if (this.#checkForNull) return null;
+    const num = this.#validateValue(value);
+    this.#checkForNull();
 
-    return this.current_value + value;
+    this.current_value = this.current_value + num;
+  }
+
+  getValue() {
+    this.#checkForNull();
+
+    return this.current_value;
   }
 }

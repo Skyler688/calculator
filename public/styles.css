@@ -6,10 +6,11 @@
 body {
   width: 100vw;
   height: 100vh;
-  background-color: rgb(73, 77, 79);
+  background-color: rgb(116, 116, 116);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: inset 0px 0px 35vw black;
 }
 
 .label {
@@ -24,7 +25,7 @@ body {
 
 #clear {
   grid-area: clear;
-  background-color: rgb(204, 57, 57);
+  background-color: rgb(185, 53, 53);
 }
 #negative_pos {
   grid-area: negative_pos;
@@ -45,7 +46,7 @@ body {
 }
 #equal {
   grid-area: equal;
-  background-color: rgb(57, 155, 57);
+  background-color: rgb(72, 159, 72);
 }
 
 #num_0 {
@@ -82,18 +83,22 @@ body {
   grid-area: dot;
 }
 
+.model {
+  grid-area: model;
+}
+
 .calculator {
   padding-inline: 20px;
-  padding-bottom: 30px;
+  padding-bottom: 15px;
   padding-top: 5px;
   width: 350px;
-  height: 450px;
-  background-color: rgb(71, 72, 72);
+  height: 500px;
+  background-color: rgb(56, 57, 57);
   border-radius: 20px;
-  box-shadow: inset -1.5px -3px 20px black;
+  box-shadow: inset -2px -3px 17px black;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 0.5fr 1.2fr repeat(5, 1fr);
+  grid-template-rows: 0.5fr 1.2fr repeat(5, 1fr) 0.2fr;
   grid-template-areas:
     "label label label label"
     "display display display display"
@@ -101,34 +106,36 @@ body {
     "num_7 num_8 num_9 multiply"
     "num_4 num_5 num_6 sub"
     "num_1 num_2 num_3 add"
-    "num_0 dot equal equal";
+    "num_0 dot equal equal"
+    "model model model model";
   gap: 10px;
 }
 
 .shadow {
   border-radius: 20px;
-  box-shadow: 2.5px 5px 10px 2px black;
+  box-shadow: 3px 6px 12px 2px rgba(0, 0, 0, 0.755);
 }
 
 .corp {
-  margin-left: 15px;
-  font-size: 17px;
+  margin-top: 5px;
+  margin-left: 40px;
+  font-size: 24px;
   font-weight: 100;
   font-family: "Brush Script MT", cursive;
+  color: #e0be74;
 }
 
 .model {
-  font-size: 22px;
+  font-size: 15px;
   font-weight: 800;
-  margin-right: 15px;
-  color: rgb(33, 33, 33);
-  border-bottom: 2px solid #313131;
+  text-align: center;
+  color: #9d9d9d;
 }
 
 .model span {
-  font-size: 15px;
+  font-size: 10px;
   font-style: italic;
-  color: rgb(174, 160, 143);
+  color: #e0be74;
 }
 
 .display {
@@ -145,6 +152,7 @@ body {
 }
 
 .display p {
+  font-family: "Trebuchet MS", sans-serif;
   margin-inline: 10px;
   font-size: 30px;
 }
@@ -152,7 +160,7 @@ body {
 .btn {
   border: 2px solid rgb(65, 65, 65);
   border-radius: 8px;
-  box-shadow: 1px 2px 3px 1.5px black;
+  box-shadow: 1px 2px 5px 1.5px rgba(0, 0, 0, 0.844);
   background-color: rgb(161, 151, 139);
   font-size: 18px;
   font-weight: 900;
